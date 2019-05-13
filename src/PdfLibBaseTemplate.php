@@ -2,6 +2,8 @@
 
 namespace RebelWalls\PdfLibHelper;
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use RebelWalls\PdfLibHelper\PdfLibHelper;
 
 abstract class PdfLibBaseTemplate extends PdfLibHelper
@@ -23,9 +25,8 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
     private function initialize()
     {
         $this->pdf->set_option('errorpolicy=exception');
-        $this->pdf->set_option('stringformat=utf8');
-        $this->pdf->set_option('SearchPath={{' . config('pdf.resource-path') . '}}');
-        $this->pdf->set_option('errorpolicy=exception');
+        $this->pdf->set_option('stringformat=' . config('pdflib-helper.string-format'));
+        $this->pdf->set_option('SearchPath={{' . config('pdflib-helper.resource-path') . '}}');
 
         if ($this->pdf->begin_document('', '') === 0) {
             die("Error: " . $this->pdf->get_errmsg());
@@ -45,18 +46,36 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
         $this->pdf->scale(2.83464567, 2.83464567);
     }
 
-//    protected function getOutput(string $fileName)
-//    {
-//        $this->pdf->end_page_ext("");
-//        $this->pdf->end_document("");
-//
-//        $buffer = $this->pdf->get_buffer();
-//        $bufferLength = strlen($buffer);
-//
-//        header("Content-type: application/pdf");
-//        header("Content-Length: $bufferLength");
-//        header("Content-Disposition: inline; filename=" . $fileName);
-//
-//        return $buffer;
-//    }
+    /**
+     * @param string $fileName
+     */
+    protected function writeOutput(string $fileName)
+    {
+        $this->pdf->end_page_ext("");
+        $this->pdf->end_document("");
+
+        $buffer = $this->pdf->get_buffer();
+        $bufferLength = strlen($buffer);
+
+        header("Content-type: application/pdf");
+        header("Content-Length: $bufferLength");
+        header("Content-Disposition: inline; filename=" . $fileName);
+
+        print $buffer;
+    }
+
+    /**
+     * @param string $fileName
+     */
+    protected function writeFile(string $fileName, $path = null)
+    {
+        // @todo: Implement $path
+
+        $this->pdf->end_page_ext("");
+        $this->pdf->end_document("");
+
+        $fileContent = $this->pdf->get_buffer();
+
+        Storage::disk('local')->put($fileName, $fileContent);
+    }
 }

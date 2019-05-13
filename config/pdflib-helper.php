@@ -12,5 +12,6 @@ return [
         'bottom' => 10,
         'left' => 10,
     ],
-    'default-color-space' => 'rgb'
+    'default-color-space' => 'rgb',
+    'string-format' => 'utf8'
 ];
