@@ -1,0 +1,43 @@
+{
+  "name": "rebelwalls/pdflib-helper",
+  "description": "Wrapper for generating Pdf files with PdfLib",
+  "type": "library",
+  "keywords": ["laravel", "pdflib", "pdf"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Edward Karlsson",
+      "email": "edward@rebelwalls.com"
+    },
+    {
+      "name": "Daniel Nordström",
+      "email": "daniel@rebelwalls.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "laravel/framework": "^5.4",
+    "fzaninotto/faker": "^1.7",
+    "ext-pdflib": "*"
+  },
+  "require-dev": {
+    "mockery/mockery": "^0.9.5",
+    "phpunit/phpunit": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "RebelWalls\\PdfLibHelper\\": "src/",
+      "RebelWalls\\PdfLibHelper\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "RebelWalls\\PdfLibHelper\\ServiceProvider"
+      ]
+    }
+  }
+}
