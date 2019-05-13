@@ -1,20 +1,21 @@
 <?php
 
-namespace RebelWalls\PdfLibHelper\Templates;
+namespace RebelWalls\PdfLibHelper;
 
-use Pdf\PdfLibAdapter;
+use PDFlib;
 use RebelWalls\PdfLibHelper\Helpers\PdfPosition;
-use RebelWalls\PdfLibHelper\Templates\Concerns\CanDrawCell;
-use RebelWalls\PdfLibHelper\Templates\Concerns\CanDrawGraphic;
-use RebelWalls\PdfLibHelper\Templates\Concerns\CanDrawImage;
-use RebelWalls\PdfLibHelper\Templates\Concerns\CanDrawKeyValueTable;
-use RebelWalls\PdfLibHelper\Templates\Concerns\CanDrawLine;
-use RebelWalls\PdfLibHelper\Templates\Concerns\CanDrawTable;
+use RebelWalls\PdfLibHelper\Concerns\CanDrawCell;
+use RebelWalls\PdfLibHelper\Concerns\CanDrawGraphic;
+use RebelWalls\PdfLibHelper\Concerns\CanDrawImage;
+use RebelWalls\PdfLibHelper\Concerns\CanDrawKeyValueTable;
+use RebelWalls\PdfLibHelper\Concerns\CanDrawLine;
+use RebelWalls\PdfLibHelper\Concerns\CanDrawTable;
+use RebelWalls\PdfLibHelper\Helpers\PdfText;
 
 /**
- * @property PdfLibAdapter adapter
+ * @property PdfLib pdf
  */
-abstract class PdfBaseBuilder
+abstract class PdfLibHelper
 {
     protected $pdf;
     protected $pos;
@@ -39,8 +40,9 @@ abstract class PdfBaseBuilder
      */
     public function __construct()
     {
-        $this->adapter = new PdfLibAdapter;
+        $this->pdf = new PdfLib();
 
         $this->pos = new PdfPosition();
+        $this->text = new PdfText($this->pdf);
     }
 }

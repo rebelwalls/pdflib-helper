@@ -2,7 +2,7 @@
 
 namespace RebelWalls\PdfLibHelper\Concerns;
 
-use RebelWalls\PdfLibHelper\Elements\PdfImage;
+use RebelWalls\PdfLibHelper\Assets\PdfImage;
 
 trait CanDrawImage
 {

@@ -2,7 +2,7 @@
 
 namespace RebelWalls\PdfLibHelper\Concerns;
 
-use RebelWalls\PdfLibHelper\Elements\PdfLine;
+use RebelWalls\PdfLibHelper\Assets\PdfLine;
 use RebelWalls\PdfLibHelper\Helpers\PdfColor;
 
 trait CanDrawLine {

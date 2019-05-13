@@ -2,9 +2,9 @@
 
 namespace RebelWalls\PdfLibHelper\Concerns;
 
-use RebelWalls\PdfLibHelper\Elements\PdfCell;
-use RebelWalls\PdfLibHelper\Elements\PdfLine;
-use RebelWalls\PdfLibHelper\Elements\PdfTable;
+use RebelWalls\PdfLibHelper\Assets\PdfCell;
+use RebelWalls\PdfLibHelper\Assets\PdfLine;
+use RebelWalls\PdfLibHelper\Assets\PdfTable;
 use RebelWalls\PdfLibHelper\Helpers\PdfColor;
 use Illuminate\Support\Collection;
 

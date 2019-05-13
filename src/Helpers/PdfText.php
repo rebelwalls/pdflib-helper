@@ -2,7 +2,7 @@
 
 namespace RebelWalls\PdfLibHelper\Helpers;
 
-use RebelWalls\PdfLibHelper\PdfLibAdapter;
+use PDFlib;
 
 class PdfText
 {
@@ -17,18 +17,18 @@ class PdfText
     public $loadedFonts;
 
     /**
-     * @var PdfLibAdapter
+     * @var PdfLib
      */
-    private $adapter;
+    private $pdf;
 
     /**
      * PdfText constructor.
      *
-     * @param PdfLibAdapter $adapter
+     * @param PdfLib $pdf
      */
-    public function __construct(PdfLibAdapter $adapter)
+    public function __construct(PdfLib $pdf)
     {
-        $this->adapter = $adapter;
+        $this->pdf = $pdf;
     }
 
     /**
@@ -40,10 +40,10 @@ class PdfText
         collect($fonts)
             ->prepend($defaultFont)
             ->each(function ($font) {
-                $this->loadedFonts[$font] = $this->adapter->loadFont($font, 'unicode', 'embedding');
-                $this->loadedFonts[$font . '-B'] = $this->adapter->loadFont($font, 'unicode', 'embedding fontstyle=bold');
-                $this->loadedFonts[$font . '-I'] = $this->adapter->loadFont($font, 'unicode', 'embedding  fontstyle=italic');
-                $this->loadedFonts[$font . '-BI'] = $this->adapter->loadFont($font, 'unicode', 'embedding fontstyle=bolditalic');
+                $this->loadedFonts[$font] = $this->pdf->load_font($font, 'unicode', 'embedding');
+                $this->loadedFonts[$font . '-B'] = $this->pdf->load_font($font, 'unicode', 'embedding fontstyle=bold');
+                $this->loadedFonts[$font . '-I'] = $this->pdf->load_font($font, 'unicode', 'embedding  fontstyle=italic');
+                $this->loadedFonts[$font . '-BI'] = $this->pdf->load_font($font, 'unicode', 'embedding fontstyle=bolditalic');
             });
 
         $this->defaultFont = $defaultFont;
@@ -62,13 +62,13 @@ class PdfText
     {
         $blackColor = new PdfColor();
 
-        $this->adapter->setFont($this->defaultFontNo, $this->defaultFontSize);
+        $this->pdf->setfont($this->defaultFontNo, $this->defaultFontSize);
 
 //        dd($this->defaultFontSize);
 
 
-        $this->adapter->setColor('stroke', $blackColor->colorSpace, $blackColor->c1, $blackColor->c2, $blackColor->c3, $blackColor->c4);
-        $this->adapter->setColor('fill', $blackColor->colorSpace, $blackColor->c1, $blackColor->c2, $blackColor->c3, $blackColor->c4);
+        $this->pdf->setcolor('stroke', $blackColor->colorSpace, $blackColor->c1, $blackColor->c2, $blackColor->c3, $blackColor->c4);
+        $this->pdf->setcolor('fill', $blackColor->colorSpace, $blackColor->c1, $blackColor->c2, $blackColor->c3, $blackColor->c4);
 
         return $this;
     }

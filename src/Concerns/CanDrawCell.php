@@ -2,7 +2,7 @@
 
 namespace RebelWalls\PdfLibHelper\Concerns;
 
-use RebelWalls\PdfLibHelper\Elements\PdfCell;
+use RebelWalls\PdfLibHelper\Assets\PdfCell;
 use RebelWalls\PdfLibHelper\Helpers\PdfText;
 
 /**
