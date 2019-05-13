@@ -17,14 +17,15 @@ use RebelWalls\PdfLibHelper\Helpers\PdfText;
  */
 abstract class PdfLibHelper
 {
+    protected $additionalFonts;
+    protected $color;
+    protected $defaultFont;
+    protected $defaultFontSize;
+    protected $documentCreator;
+    protected $fontList;
     protected $pdf;
     protected $pos;
     protected $text;
-    protected $color;
-    protected $fontList;
-    protected $defaultFont;
-    protected $defaultFontSize;
-    protected $additionalFonts;
 
     use CanDrawCell;
     use CanDrawGraphic;

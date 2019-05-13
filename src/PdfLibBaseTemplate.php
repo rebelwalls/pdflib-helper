@@ -2,12 +2,13 @@
 
 namespace RebelWalls\PdfLibHelper;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use RebelWalls\PdfLibHelper\PdfLibHelper;
 
 abstract class PdfLibBaseTemplate extends PdfLibHelper
 {
+    public $documentCreator = 'Rebel Walls - PdfLib Helper';
+    public $documentTitle = 'Document Title';
+
     protected $contentService;
 
     /**
@@ -16,7 +17,6 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
     public function __construct()
     {
         parent::__construct();
-
         $this->initialize();
     }
 
@@ -32,8 +32,8 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
             die("Error: " . $this->pdf->get_errmsg());
         }
 
-        $this->pdf->set_info("Creator", "PDFlib starter sample");
-        $this->pdf->set_info("Title", "starter_basic");
+        $this->pdf->set_info("Creator", $this->documentCreator);
+        $this->pdf->set_info("Title", $this->documentTitle);
 
         $this->beginPage();
 
@@ -44,6 +44,14 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
     {
         $this->pdf->begin_page_ext(0,0, 'width=a4.width height=a4.height topdown=true userunit=mm');
         $this->pdf->scale(2.83464567, 2.83464567);
+    }
+
+    protected function newPage()
+    {
+        $this->pdf->end_page_ext("");
+        $this->beginPage();
+        $this->pos->moveToTop();
+        $this->pos->moveToFarLeft();
     }
 
     /**
