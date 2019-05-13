@@ -12,7 +12,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/pdflib-builder.php', 'pdflib-builder'
+            __DIR__ . '/../config/pdflib-helper.php', 'pdflib-helper'
         );
     }
 
@@ -24,7 +24,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/pdflib-builder.php' => config_path('pdflib-builder.php'),
+            __DIR__ . '/../config/pdflib-helper.php' => config_path('pdflib-helper.php'),
         ]);
     }
 }
