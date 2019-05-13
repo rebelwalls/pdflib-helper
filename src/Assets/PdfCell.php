@@ -1,10 +1,10 @@
 <?php
 
-namespace RebelWalls\PdfLibHelper\Elements;
+namespace RebelWalls\PdfLibHelper\Assets;
 
 use RebelWalls\PdfLibHelper\Helpers\PdfColor;
 
-class PdfCell extends BaseGenerator
+class PdfCell extends BaseAsset
 {
     public $align;
     public $caps;

@@ -1,16 +1,16 @@
 <?php
 
-namespace RebelWalls\PdfLibHelper\Elements;
+namespace RebelWalls\PdfLibHelper\Assets;
 
 /**
- * Class PdfGraphics
+ * Class PdfImage
  *
  * @package App\Services\Pdf\Generators
  *
  * @property-read float $scale;
  */
 
-class PdfGraphic extends BaseGenerator
+class PdfImage extends BaseAsset
 {
     public $file;
     public $scale = 1;
@@ -31,9 +31,9 @@ class PdfGraphic extends BaseGenerator
     /**
      * @param string $file
      *
-     * @return PdfGraphic
+     * @return PdfImage
      */
-    private function setFile(string $file): PdfGraphic
+    private function setFile(string $file): PdfImage
     {
         $this->file = $file;
 
@@ -43,9 +43,9 @@ class PdfGraphic extends BaseGenerator
     /**
      * @param float $scale
      *
-     * @return PdfGraphic
+     * @return PdfImage
      */
-    public function scale(float $scale): PdfGraphic
+    public function scale(float $scale): PdfImage
     {
         $this->scale = $scale;
 
@@ -57,7 +57,7 @@ class PdfGraphic extends BaseGenerator
      *
      * @return $this
      */
-    public function alignX(string $positionString = 'left'): PdfGraphic
+    public function alignX(string $positionString = 'left'): PdfImage
     {
         $this->positionX = $this->stringToPosition($positionString);
 
@@ -69,7 +69,7 @@ class PdfGraphic extends BaseGenerator
      *
      * @return $this
      */
-    public function alignY(string $positionString = 'top'): PdfGraphic
+    public function alignY(string $positionString = 'top'): PdfImage
     {
         $this->positionX = $this->stringToPosition($positionString);
 

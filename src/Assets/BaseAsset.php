@@ -1,8 +1,8 @@
 <?php
 
-namespace RebelWalls\PdfLibHelper\Elements;
+namespace RebelWalls\PdfLibHelper\Assets;
 
-abstract class BaseGenerator
+abstract class BaseAsset
 {
     /**
      * Create a new element.

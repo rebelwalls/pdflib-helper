@@ -1,6 +1,6 @@
 <?php
 
-namespace RebelWalls\PdfLibHelper\Templates\Concerns;
+namespace RebelWalls\PdfLibHelper\Concerns;
 
 use RebelWalls\PdfLibHelper\Elements\PdfLine;
 use RebelWalls\PdfLibHelper\Helpers\PdfColor;

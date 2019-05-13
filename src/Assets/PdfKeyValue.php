@@ -1,6 +1,6 @@
 <?php
 
-namespace RebelWalls\PdfLibHelper\Elements;
+namespace RebelWalls\PdfLibHelper\Assets;
 
 /**
  * Class PdfKeyValue
@@ -8,7 +8,7 @@ namespace RebelWalls\PdfLibHelper\Elements;
  * @package App\Services\Pdf\Generators
  */
 
-class PdfKeyValue extends BaseGenerator
+class PdfKeyValue extends BaseAsset
 {
     public $items = [];
 

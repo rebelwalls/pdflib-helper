@@ -1,6 +1,6 @@
 <?php
 
-namespace RebelWalls\PdfLibHelper\Elements;
+namespace RebelWalls\PdfLibHelper\Assets;
 
 use RebelWalls\PdfLibHelper\Helpers\PdfColor;
 
@@ -10,7 +10,7 @@ use RebelWalls\PdfLibHelper\Helpers\PdfColor;
  * @package App\Services\Pdf\Generators
  */
 
-class PdfLine extends BaseGenerator
+class PdfLine extends BaseAsset
 {
     public $fromX;
     public $fromY;

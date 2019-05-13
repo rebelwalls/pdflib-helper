@@ -1,10 +1,10 @@
 <?php
 
-namespace RebelWalls\PdfLibHelper\Elements;
+namespace RebelWalls\PdfLibHelper\Assets;
 
 use Illuminate\Support\Collection;
 
-class PdfTable extends BaseGenerator
+class PdfTable extends BaseAsset
 {
     /** @var Collection */
     public $rows;
