@@ -3,6 +3,8 @@
 namespace RebelWalls\PdfLibHelper;
 
 use PDFlib;
+use RebelWalls\PdfLibHelper\Concerns\CanDrawCircle;
+use RebelWalls\PdfLibHelper\Concerns\CanDrawRectangle;
 use RebelWalls\PdfLibHelper\Helpers\PdfPosition;
 use RebelWalls\PdfLibHelper\Concerns\CanDrawCell;
 use RebelWalls\PdfLibHelper\Concerns\CanDrawGraphic;
@@ -17,6 +19,7 @@ use RebelWalls\PdfLibHelper\Helpers\PdfText;
  */
 abstract class PdfLibHelper
 {
+    protected $pageCount = 0;
     protected $additionalFonts;
     protected $color;
     protected $defaultFont;
@@ -28,10 +31,12 @@ abstract class PdfLibHelper
     protected $text;
 
     use CanDrawCell;
+    use CanDrawCircle;
     use CanDrawGraphic;
     use CanDrawImage;
     use CanDrawKeyValueTable;
     use CanDrawLine;
+    use CanDrawRectangle;
     use CanDrawTable;
 
     /**

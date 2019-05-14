@@ -4,25 +4,12 @@ namespace RebelWalls\PdfLibHelper\Assets;
 
 use RebelWalls\PdfLibHelper\Helpers\PdfColor;
 
-/**
- * Class PdfLine
- *
- * @package App\Services\Pdf\Generators
- */
-
-class PdfLine extends BaseAsset
+class PdfCircle extends BaseAsset
 {
-    public $fromX;
-    public $fromY;
-    public $toX;
-    public $toY;
+    public $centerX;
+    public $centerY;
+    public $radius;
     public $lineWidth;
-
-    public $colorSpace;
-    public $c1;
-    public $c2;
-    public $c3;
-    public $c4;
 
     /** @var PdfColor */
     public $strokeColor;
@@ -31,29 +18,29 @@ class PdfLine extends BaseAsset
     public $fillColor;
 
     /**
-     * @param $x
-     * @param $y
+     * PdfCell constructor.
      *
-     * @return $this
+     * @param $centerX
+     * @param $centerY
+     * @param $radius
      */
-    public function fromPos($x, $y)
+    public function __construct($centerX, $centerY, $radius)
     {
-        $this->fromX = $x;
-        $this->fromY = $y;
-
-        return $this;
+        $this->setRectangle($centerX, $centerY, $radius);
     }
 
     /**
-     * @param $x
-     * @param $y
+     * @param $centerX
+     * @param $centerY
+     * @param $radius
      *
      * @return $this
      */
-    public function toPos($x, $y)
+    private function setRectangle($centerX, $centerY, $radius)
     {
-        $this->toX = $x;
-        $this->toY = $y;
+        $this->centerX = $centerX;
+        $this->centerY = $centerY;
+        $this->radius = $radius;
 
         return $this;
     }

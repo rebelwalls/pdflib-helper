@@ -12,6 +12,12 @@ class PdfKeyValue extends BaseAsset
 {
     public $items = [];
 
+    /**
+     * @param $key
+     * @param $value
+     *
+     * @return $this
+     */
     public function addItem($key, $value)
     {
         $this->items[] = [$key, $value];

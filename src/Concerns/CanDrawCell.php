@@ -16,9 +16,9 @@ use RebelWalls\PdfLibHelper\Helpers\PdfText;
 trait CanDrawCell {
 
     /**
-     * @param $cell
+     * @param PdfCell $cell
      */
-    public function drawCell($cell): void
+    public function drawCell(PdfCell $cell): void
     {
         $this->text->reset();
 

@@ -147,6 +147,30 @@ class PdfPosition
     }
 
     /**
+     * @param int $subbedX
+     *
+     * @return $this
+     */
+    public function subX(int $subbedX)
+    {
+        $this->x -= $subbedX;
+
+        return $this;
+    }
+
+    /**
+     * @param int $subbedY
+     *
+     * @return $this
+     */
+    public function subY(int $subbedY)
+    {
+        $this->y -= $subbedY;
+
+        return $this;
+    }
+
+    /**
      * @param int|null $count
      *
      * @return $this

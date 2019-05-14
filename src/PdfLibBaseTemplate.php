@@ -42,13 +42,13 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
 
     protected function beginPage()
     {
+        $this->pageCount++;
         $this->pdf->begin_page_ext(0,0, 'width=a4.width height=a4.height topdown=true userunit=mm');
         $this->pdf->scale(2.83464567, 2.83464567);
     }
 
     protected function newPage()
     {
-        $this->pdf->end_page_ext("");
         $this->beginPage();
         $this->pos->moveToTop();
         $this->pos->moveToFarLeft();
@@ -59,7 +59,11 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
      */
     protected function writeOutput(string $fileName)
     {
-        $this->pdf->end_page_ext("");
+        for ($pageNumber = 1; $pageNumber <= $this->pageCount; $pageNumber++) {
+            $this->pdf->resume_page('pagenumber ' . $pageNumber);
+            $this->pdf->end_page_ext("");
+        }
+
         $this->pdf->end_document("");
 
         $buffer = $this->pdf->get_buffer();

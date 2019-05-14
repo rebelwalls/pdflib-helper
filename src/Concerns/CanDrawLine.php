@@ -5,8 +5,11 @@ namespace RebelWalls\PdfLibHelper\Concerns;
 use RebelWalls\PdfLibHelper\Assets\PdfLine;
 use RebelWalls\PdfLibHelper\Helpers\PdfColor;
 
-trait CanDrawLine {
-
+trait CanDrawLine
+{
+    /**
+     * @param PdfLine $line
+     */
     public function drawLine(PdfLine $line)
     {
         $strokeColor = $line->strokeColor ?? new PdfColor();

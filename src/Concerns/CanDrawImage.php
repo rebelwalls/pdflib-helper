@@ -6,7 +6,6 @@ use RebelWalls\PdfLibHelper\Assets\PdfImage;
 
 trait CanDrawImage
 {
-
     /**
      * @param PdfImage $image
      */
