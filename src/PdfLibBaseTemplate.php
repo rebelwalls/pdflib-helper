@@ -24,6 +24,10 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
 
     private function initialize()
     {
+        if (config('pdflib-helper.license-key')) {
+            $this->pdf->set_option('license=' . config('pdflib-helper.license-key'));
+        }
+
         $this->pdf->set_option('errorpolicy=exception');
         $this->pdf->set_option('stringformat=' . config('pdflib-helper.string-format'));
         $this->pdf->set_option('SearchPath={{' . config('pdflib-helper.resource-path') . '}}');

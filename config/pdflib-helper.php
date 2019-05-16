@@ -13,5 +13,6 @@ return [
         'left' => 10,
     ],
     'default-color-space' => 'rgb',
-    'string-format' => 'utf8'
+    'string-format' => 'utf8',
+    'license-key' => env('PDFLIB_LICENSE_KEY')
 ];
