@@ -39,6 +39,8 @@ trait CanDrawTable
             $defaultColumnWidth = 0;
         }
 
+        $rowHeight = isset($table->size) ? $table->size * 1.5 : $this->pos->line_height;
+
         if ($table->titles) {
             $columnAlignments = $firstRow->pluck('align')->transform(function ($align) {
                     return $align ?? 'left';
@@ -47,6 +49,16 @@ trait CanDrawTable
             $columnWidths = $columnWidths->transform(function ($width) use ($defaultColumnWidth) {
                 return $width ?? $defaultColumnWidth;
             });
+
+            $this->drawLine(
+                PdfLine::make()
+                    ->fromPos($this->pos->min_x, $this->pos->y)
+                    ->toPos($this->pos->max_x, $this->pos->y)
+                    ->lineWidth(.1)
+                    ->stroke((new PdfColor())->gray(.5))
+            );
+
+            $this->pos->addY(5);
 
             $table->titles
                 ->each(function ($title, $index) use ($table, $columnAlignments, $columnWidths) {
@@ -61,22 +73,22 @@ trait CanDrawTable
                     $this->pos->addX($columnWidths[$index]);
                 });
 
-            $this->pos->addY(1);
+            $this->pos->addY(3);
 
             $this->drawLine(
                 PdfLine::make()
                     ->fromPos($this->pos->min_x, $this->pos->y)
                     ->toPos($this->pos->max_x, $this->pos->y)
-                    ->lineWidth(.2)
-                    ->stroke((new PdfColor())->gray(.9))
+                    ->lineWidth(.1)
+                    ->stroke((new PdfColor())->gray(.5))
             );
 
             $this->pos->setX($startX);
-            $this->pos->addY($table->size + 1);
+            $this->pos->addY($rowHeight);
         }
 
         $table->rows
-            ->each(function($tableRow) use ($table, $defaultColumnWidth, $startX) {
+            ->each(function($tableRow) use ($table, $defaultColumnWidth, $startX, $rowHeight) {
                 $tableRow = collect($tableRow);
 
                 collect($tableRow)
@@ -95,7 +107,7 @@ trait CanDrawTable
                     });
 
                 $this->pos->setX($startX);
-                $this->pos->addY($table->size + 2);
+                $this->pos->addY($rowHeight);
             });
     }
 }

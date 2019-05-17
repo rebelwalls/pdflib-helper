@@ -16,7 +16,7 @@ trait CanDrawKeyValueTable
         $startX = $this->pos->x; // Remember left starting position
 
         if (! $maxWidth) {
-            $maxWidth = $this->pos->max_x;
+            $maxWidth = $this->pos->getUsableX();
         }
 
         $tableData->each(function($tableRow) use ($maxWidth, $startX, $columnMargin) {
@@ -32,7 +32,7 @@ trait CanDrawKeyValueTable
             }
 
             $this->drawCell($firstCell);
-            $this->pos->addX($firstCell->width + $columnMargin);
+            $this->pos->addX($firstCell->width);
             $this->drawCell($secondCell);
             $this->pos->lineBreak();
             $this->pos->x = $startX; // Reset to startX position

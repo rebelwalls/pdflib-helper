@@ -23,6 +23,7 @@ class PdfPosition
     public $min_x;
 
     public $line_height;
+    private $default_line_height;
 
     /**
      * PdfPosition constructor.
@@ -61,13 +62,27 @@ class PdfPosition
         $this->margin_bottom = config('pdf.margin.bottom');
         $this->margin_left = config('pdf.margin.left');
 
-        $this->line_height = config('pdf.line-height');
+        $this->default_line_height = config('pdf.line-height');
+        $this->line_height = $this->default_line_height;
 
         // Computed
         $this->min_y = $this->margin_top;
         $this->max_x = $this->width - $this->margin_right;
         $this->max_y = $this->height - $this->margin_bottom;
         $this->min_x = $this->margin_left;
+
+        return $this;
+    }
+
+    /**
+     * @param $defaultLineHeight
+     *
+     * @return $this
+     */
+    public function setDefaultLineHeight($defaultLineHeight)
+    {
+        $this->default_line_height = $defaultLineHeight;
+        $this->line_height = $defaultLineHeight;
 
         return $this;
     }
@@ -115,7 +130,7 @@ class PdfPosition
      *
      * @return $this
      */
-    public function setY(int $y)
+    public function setY($y)
     {
         $this->y = $y;
 
@@ -127,7 +142,7 @@ class PdfPosition
      *
      * @return $this
      */
-    public function addX(int $addedX)
+    public function addX($addedX)
     {
         $this->x = $this->x + $addedX;
 
@@ -139,7 +154,7 @@ class PdfPosition
      *
      * @return $this
      */
-    public function addY(int $addedY)
+    public function addY($addedY)
     {
         $this->y += $addedY;
 
@@ -151,7 +166,7 @@ class PdfPosition
      *
      * @return $this
      */
-    public function subX(int $subbedX)
+    public function subX($subbedX)
     {
         $this->x -= $subbedX;
 
@@ -163,7 +178,7 @@ class PdfPosition
      *
      * @return $this
      */
-    public function subY(int $subbedY)
+    public function subY($subbedY)
     {
         $this->y -= $subbedY;
 
@@ -241,7 +256,7 @@ class PdfPosition
      */
     public function resetLineHeight()
     {
-        $this->line_height = config('fpdf.line-height');
+        $this->line_height = $this->default_line_height;
 
         return $this;
     }

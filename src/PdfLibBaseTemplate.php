@@ -39,6 +39,10 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
         $this->pdf->set_info("Creator", $this->documentCreator);
         $this->pdf->set_info("Title", $this->documentTitle);
 
+        if (isset($this->defaultLineHeight)) {
+            $this->pos->setDefaultLineHeight($this->defaultLineHeight);
+        }
+
         $this->beginPage();
 
         $this->text->initFonts($this->defaultFont, $this->additionalFonts, $this->defaultFontSize);
