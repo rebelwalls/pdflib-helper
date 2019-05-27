@@ -20,6 +20,8 @@ trait CanDrawCell {
      */
     public function drawCell(PdfCell $cell): void
     {
+        $options = [];
+
         $this->text->reset();
 
         $posX = $this->pos->x;
@@ -52,14 +54,30 @@ trait CanDrawCell {
         }
 
         if ($cell->color) {
-
-//            dd($cell->color);
-
             $this->pdf->setcolor('stroke', $cell->color->colorSpace, $cell->color->c1, $cell->color->c2, $cell->color->c3, $cell->color->c4);
             $this->pdf->setcolor('fill', $cell->color->colorSpace, $cell->color->c1, $cell->color->c2, $cell->color->c3, $cell->color->c4);
         }
 
-        $this->pdf->show_xy($cell->content, $posX, $this->pos->y);
+        if ($cell->opacity) {
+            $graphicState = $this->pdf->create_gstate('opacityfill=' . $cell->opacity / 100);
+            $this->pdf->set_gstate($graphicState);
+        }
+
+        if ($cell->rotate) {
+            $options['rotate'] = $cell->rotate;
+        }
+
+        $optionsString = collect($options)
+            ->transform(function ($value, $key) {
+                return $key . '=' . $value;
+            })
+            ->implode(' ');
+
+        $this->pdf->fit_textline($cell->content, $posX, $this->pos->y, $optionsString);
+
+
+        $graphicState = $this->pdf->create_gstate('opacityfill=1');
+        $this->pdf->set_gstate($graphicState);
 
         $this->text->reset();
     }

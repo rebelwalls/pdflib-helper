@@ -13,6 +13,8 @@ class PdfCell extends BaseAsset
     public $currency;
     public $font;
     public $line_height;
+    public $opacity;
+    public $rotate;
     public $size;
     public $style;
     public $weight;
@@ -101,6 +103,20 @@ class PdfCell extends BaseAsset
     public function width($width)
     {
         $this->width = $width;
+
+        return $this;
+    }
+
+    public function opacity(int $opacity)
+    {
+        $this->opacity = $opacity;
+
+        return $this;
+    }
+
+    public function rotate($angle)
+    {
+        $this->rotate = $angle;
 
         return $this;
     }
