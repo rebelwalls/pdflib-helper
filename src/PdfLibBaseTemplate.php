@@ -62,10 +62,7 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
         $this->pos->moveToFarLeft();
     }
 
-    /**
-     * @param string $fileName
-     */
-    protected function writeOutput(string $fileName)
+    public function endDocument()
     {
         for ($pageNumber = 1; $pageNumber <= $this->pageCount; $pageNumber++) {
             $this->pdf->resume_page('pagenumber ' . $pageNumber);
@@ -74,6 +71,26 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
 
         $this->pdf->end_document("");
 
+        return $this;
+    }
+
+    /**
+     * Returns the file content string
+     *
+     * @return string
+     */
+    public function getFileContent()
+    {
+        return $this->pdf->get_buffer();
+    }
+
+    /**
+     * Outputs the file to the browser, including headers
+     *
+     * @param string $fileName
+     */
+    public function writeOutput(string $fileName)
+    {
         $buffer = $this->pdf->get_buffer();
         $bufferLength = strlen($buffer);
 
@@ -85,17 +102,16 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
     }
 
     /**
+     * Writes the file to a specific filename in the public storage
+     *
      * @param string $fileName
      */
-    protected function writeFile(string $fileName, $path = null)
+    public function writeFile(string $fileName, $path = null)
     {
         // @todo: Implement $path
 
-        $this->pdf->end_page_ext("");
-        $this->pdf->end_document("");
-
         $fileContent = $this->pdf->get_buffer();
 
-        Storage::disk('local')->put($fileName, $fileContent);
+        Storage::disk('public')->put($fileName, $fileContent);
     }
 }
