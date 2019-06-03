@@ -14,6 +14,7 @@ class PdfImage extends BaseAsset
 {
     public $file;
     public $scale = 1;
+    public $orientate = 'north';
 
     public $positionX = 0;
     public $positionY = 100;
@@ -48,6 +49,18 @@ class PdfImage extends BaseAsset
     public function scale(float $scale): PdfImage
     {
         $this->scale = $scale;
+
+        return $this;
+    }
+
+    /**
+     * @param string $orientate
+     *
+     * @return PdfImage
+     */
+    public function orientate(string $orientate): PdfImage
+    {
+        $this->orientate = $orientate;
 
         return $this;
     }

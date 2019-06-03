@@ -4,7 +4,9 @@ namespace RebelWalls\PdfLibHelper;
 
 use PDFlib;
 use RebelWalls\PdfLibHelper\Concerns\CanDrawCircle;
+use RebelWalls\PdfLibHelper\Concerns\CanDrawPdfDocument;
 use RebelWalls\PdfLibHelper\Concerns\CanDrawRectangle;
+use RebelWalls\PdfLibHelper\Concerns\CanDrawTextFlow;
 use RebelWalls\PdfLibHelper\Helpers\PdfPosition;
 use RebelWalls\PdfLibHelper\Concerns\CanDrawCell;
 use RebelWalls\PdfLibHelper\Concerns\CanDrawGraphic;
@@ -38,6 +40,8 @@ abstract class PdfLibHelper
     use CanDrawLine;
     use CanDrawRectangle;
     use CanDrawTable;
+    use CanDrawPdfDocument;
+    use CanDrawTextFlow;
 
     /**
      * PdfBaseTemplate constructor.

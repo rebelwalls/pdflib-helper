@@ -36,6 +36,22 @@ class PdfColor
         return $this;
     }
 
+    public function white($c = 0)
+    {
+        $this->colorSpace = 'white';
+        $this->c = $c;
+
+        return $this;
+    }
+
+    public function black($c = 0)
+    {
+        $this->colorSpace = 'black';
+        $this->c = $c;
+
+        return $this;
+    }
+
     public function rgb($c1 = 0, $c2 = 0, $c3 = 0)
     {
         $this->colorSpace = 'rgb';

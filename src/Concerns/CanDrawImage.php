@@ -2,6 +2,7 @@
 
 namespace RebelWalls\PdfLibHelper\Concerns;
 
+use Illuminate\Support\Facades\Storage;
 use RebelWalls\PdfLibHelper\Assets\PdfImage;
 
 trait CanDrawImage
@@ -11,7 +12,7 @@ trait CanDrawImage
      */
     public function drawImage(PdfImage $image): void
     {
-        $loadedImage = $this->pdf->load_image('auto', $image->file, '');
+        $loadedImage = $this->loadImage($image);
 
         if (!$image) {
             die("Error: " . $this->pdf->get_errmsg());
@@ -28,6 +29,32 @@ trait CanDrawImage
      */
     private function resolveImageOptionsString(PdfImage $image): string
     {
-        return 'scale=' . $image->scale . ' position={' . $image->positionX . ' ' . $image->positionY . '}';
+        return 'scale=' . $image->scale . ' position={' . $image->positionX . ' ' . $image->positionY . '} orientate=' . $image->orientate;
+    }
+
+    /**
+     * @param PdfImage $image
+     *
+     * @return mixed
+     */
+    private function loadImage(PdfImage $image)
+    {
+        $path = mb_strtolower($image->file);
+        if (str_contains($path, ['http://', 'https://'])) {
+            $content = file_get_contents($path);
+
+            $storage = Storage::disk('local');
+            $fileName = basename($path);
+            $filePath = 'pdf/' . $fileName;
+            $storage->put($filePath, $content);
+
+            $fullPath = concat_path(storage_path('app/pdf'), $fileName);
+            $loadedImage = $this->pdf->load_image('auto', $fullPath, '');
+            $storage->delete($filePath);
+        } else {
+            $loadedImage = $this->pdf->load_image('auto', $image->file, '');
+        }
+
+        return $loadedImage;
     }
 }
