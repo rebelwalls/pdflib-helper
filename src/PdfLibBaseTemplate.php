@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Storage;
 
 abstract class PdfLibBaseTemplate extends PdfLibHelper
 {
+    public $pageWidth = 'a4.width';
+    public $pageHeight = 'a4.height';
+    public $pageSettings = 'topdown=true userunit=mm';
+    public $scale = 2.83464567;
+
     public $documentCreator = 'Rebel Walls - PdfLib Helper';
     public $documentTitle = 'Document Title';
 
@@ -32,34 +37,20 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
         $this->pdf->set_option('stringformat=' . config('pdflib-helper.string-format'));
         $this->pdf->set_option('SearchPath={{' . config('pdflib-helper.resource-path') . '}}');
 
+        if (isset($this->defaultLineHeight)) {
+            $this->pos->setDefaultLineHeight($this->defaultLineHeight);
+        }
+
+        $this->text->initFonts($this->defaultFont, $this->additionalFonts, $this->defaultFontSize);
+    }
+
+    protected function beginDocument() {
         if ($this->pdf->begin_document('', '') === 0) {
             die("Error: " . $this->pdf->get_errmsg());
         }
 
         $this->pdf->set_info("Creator", $this->documentCreator);
         $this->pdf->set_info("Title", $this->documentTitle);
-
-        if (isset($this->defaultLineHeight)) {
-            $this->pos->setDefaultLineHeight($this->defaultLineHeight);
-        }
-
-        $this->beginPage();
-
-        $this->text->initFonts($this->defaultFont, $this->additionalFonts, $this->defaultFontSize);
-    }
-
-    protected function beginPage()
-    {
-        $this->pageCount++;
-        $this->pdf->begin_page_ext(0,0, 'width=a4.width height=a4.height topdown=true userunit=mm');
-        $this->pdf->scale(2.83464567, 2.83464567);
-    }
-
-    protected function newPage()
-    {
-        $this->beginPage();
-        $this->pos->moveToTop();
-        $this->pos->moveToFarLeft();
     }
 
     public function endDocument()
@@ -72,6 +63,30 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
         $this->pdf->end_document("");
 
         return $this;
+    }
+
+    protected function beginPage()
+    {
+        $this->pageCount++;
+        $this->pdf->begin_page_ext(0,0, "width={$this->pageWidth} height={$this->pageHeight} {$this->pageSettings}");
+        $this->pdf->scale($this->scale, $this->scale);
+    }
+
+    protected function suspendPage()
+    {
+        $this->pdf->suspend_page("");
+    }
+
+    protected function endPage()
+    {
+        $this->pdf->end_page_ext("");
+    }
+
+    protected function newPage()
+    {
+        $this->beginPage();
+        $this->pos->moveToTop();
+        $this->pos->moveToFarLeft();
     }
 
     /**
