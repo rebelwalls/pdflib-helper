@@ -3,6 +3,7 @@
 namespace RebelWalls\PdfLibHelper\Concerns;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use RebelWalls\PdfLibHelper\Assets\PdfImage;
 
 trait CanDrawImage
@@ -40,7 +41,8 @@ trait CanDrawImage
     private function loadImage(PdfImage $image)
     {
         $path = mb_strtolower($image->file);
-        if (str_contains($path, ['http://', 'https://'])) {
+
+        if (Str::contains($path, ['http://', 'https://'])) {
             $content = file_get_contents($path);
 
             $storage = Storage::disk('local');
