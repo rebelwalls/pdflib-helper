@@ -33,7 +33,7 @@ class PdfPosition
     public function __construct($orientation = null)
     {
         if (! $orientation) {
-            $orientation = config('pdf.orientation');
+            $orientation = config('pdf-generator.orientation');
         }
 
         $this->orientation = $orientation;
@@ -57,12 +57,12 @@ class PdfPosition
             $this->height = 210;
         }
 
-        $this->margin_top = config('pdf.margin.top');
-        $this->margin_right = config('pdf.margin.right');
-        $this->margin_bottom = config('pdf.margin.bottom');
-        $this->margin_left = config('pdf.margin.left');
+        $this->margin_top = config('pdf-generator.margin.top');
+        $this->margin_right = config('pdf-generator.margin.right');
+        $this->margin_bottom = config('pdf-generator.margin.bottom');
+        $this->margin_left = config('pdf-generator.margin.left');
 
-        $this->default_line_height = config('pdf.line-height');
+        $this->default_line_height = config('pdf-generator.line-height');
         $this->line_height = $this->default_line_height;
 
         // Computed

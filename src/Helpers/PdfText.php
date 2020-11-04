@@ -48,7 +48,7 @@ class PdfText
 
         $this->defaultFont = $defaultFont;
         $this->defaultFontNo = $this->loadedFonts[$defaultFont];
-        $this->defaultFontSize = $defaultFontSize ?? config('pdf.default-font-size');
+        $this->defaultFontSize = $defaultFontSize ?? config('pdf-generator.default-font-size');
 
         $this->currentFont = $this->defaultFont;
         $this->currentFontNo = $this->defaultFontNo;

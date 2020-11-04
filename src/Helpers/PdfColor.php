@@ -21,7 +21,7 @@ class PdfColor
 
     public function reset()
     {
-        $this->colorSpace = config('pdf.default-color-space');
+        $this->colorSpace = config('pdf-generator.default-color-space');
         $this->c1 = 0;
         $this->c2 = 0;
         $this->c3 = 0;
