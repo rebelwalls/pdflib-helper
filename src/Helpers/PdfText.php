@@ -4,22 +4,24 @@ namespace RebelWalls\PdfLibHelper\Helpers;
 
 use PDFlib;
 
+/**
+ * Class PdfText
+ *
+ * @package RebelWalls\PdfLibHelper\Helpers
+ */
 class PdfText
 {
-    public $defaultFont;
-    public $defaultFontSize;
-    public $defaultFontNo;
+    public string $defaultFont;
+    public float $defaultFontSize;
+    public int $defaultFontNo;
+    public array $loadedFonts;
 
     private $currentFont;
     private $currentFontSize;
     private $currentFontNo;
 
-    public $loadedFonts;
 
-    /**
-     * @var PdfLib
-     */
-    private $pdf;
+    private PDFlib $pdf;
 
     /**
      * PdfText constructor.
@@ -34,8 +36,9 @@ class PdfText
     /**
      * @param string $defaultFont
      * @param array $fonts
+     * @param float $defaultFontSize
      */
-    public function initFonts(string $defaultFont, array $fonts, $defaultFontSize)
+    public function initFonts(string $defaultFont, array $fonts, float $defaultFontSize)
     {
         collect($fonts)
             ->prepend($defaultFont)

@@ -2,28 +2,49 @@
 
 namespace RebelWalls\PdfLibHelper\Helpers;
 
+/**
+ * Class PdfPosition
+ *
+ * @package RebelWalls\PdfLibHelper\Helpers
+ *
+ * @property string|null $orientation
+ * @property int $x
+ * @property int $y
+ * @property int $width
+ * @property int $height
+ * @property int $margin_top
+ * @property int $margin_right
+ * @property int $margin_bottom
+ * @property int $margin_left
+ * @property int $min_y
+ * @property int $max_x
+ * @property int $max_y
+ * @property int $min_x
+ * @property int $line_height
+ * @property int $default_line_height
+ */
 class PdfPosition
 {
-    public $orientation;
+    public string $orientation;
 
-    public $x;
-    public $y;
+    public int $x;
+    public int $y;
 
-    public $width;
-    public $height;
+    public int $width;
+    public int $height;
 
-    public $margin_top;
-    public $margin_right;
-    public $margin_bottom;
-    public $margin_left;
+    public int $margin_top;
+    public int $margin_right;
+    public int $margin_bottom;
+    public int $margin_left;
 
-    public $min_y;
-    public $max_x;
-    public $max_y;
-    public $min_x;
+    public int $min_y;
+    public int $max_x;
+    public int $max_y;
+    public int $min_x;
 
-    public $line_height;
-    private $default_line_height;
+    public int $line_height;
+    private int $default_line_height;
 
     /**
      * PdfPosition constructor.

@@ -7,6 +7,7 @@ use RebelWalls\PdfLibHelper\Concerns\CanDrawCircle;
 use RebelWalls\PdfLibHelper\Concerns\CanDrawPdfDocument;
 use RebelWalls\PdfLibHelper\Concerns\CanDrawRectangle;
 use RebelWalls\PdfLibHelper\Concerns\CanDrawTextFlow;
+use RebelWalls\PdfLibHelper\Helpers\PdfColor;
 use RebelWalls\PdfLibHelper\Helpers\PdfPosition;
 use RebelWalls\PdfLibHelper\Concerns\CanDrawCell;
 use RebelWalls\PdfLibHelper\Concerns\CanDrawGraphic;
@@ -18,19 +19,27 @@ use RebelWalls\PdfLibHelper\Helpers\PdfText;
 
 /**
  * @property PdfLib pdf
+ * @property int $pageCount
+ * @property array $additionalFonts
+ * @property string $defaultFont
+ * @property float $defaultFontSize
+ * @property string $documentCreator
+ *
+ * @property PdfPosition $pos
+ * @property PdfText $text
  */
 abstract class PdfLibHelper
 {
-    protected $pageCount = 0;
-    protected $additionalFonts;
-    protected $color;
-    protected $defaultFont;
-    protected $defaultFontSize;
-    protected $documentCreator;
-    protected $fontList;
-    protected $pdf;
-    protected $pos;
-    protected $text;
+    protected int $pageCount = 0;
+    protected array $additionalFonts;
+    protected string $defaultFont;
+    protected float $defaultFontSize;
+    protected string $documentCreator;
+    protected array $fontList;
+    protected PdfColor $color;
+    protected PDFlib $pdf;
+    protected PdfPosition $pos;
+    protected PdfText $text;
 
     use CanDrawCell;
     use CanDrawCircle;
@@ -45,8 +54,6 @@ abstract class PdfLibHelper
 
     /**
      * PdfBaseTemplate constructor.
-     *
-     * @param array $options
      */
     public function __construct()
     {

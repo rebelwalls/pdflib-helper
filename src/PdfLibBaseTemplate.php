@@ -4,17 +4,25 @@ namespace RebelWalls\PdfLibHelper;
 
 use Illuminate\Support\Facades\Storage;
 
+/**
+ * Class PdfLibBaseTemplate
+ *
+ * @package RebelWalls\PdfLibHelper
+ *
+ * @property string $pageWidth
+ * @property string $pageHeight
+ * @property string $pageSettings
+ * @property float $scale
+ */
 abstract class PdfLibBaseTemplate extends PdfLibHelper
 {
-    public $pageWidth = 'a4.width';
-    public $pageHeight = 'a4.height';
-    public $pageSettings = 'topdown=true userunit=mm';
-    public $scale = 2.83464567;
+    public string $pageWidth = 'a4.width';
+    public string $pageHeight = 'a4.height';
+    public string $pageSettings = 'topdown=true userunit=mm';
+    public float $scale = 2.83464567;
 
-    public $documentCreator = 'Rebel Walls - PdfLib Helper';
-    public $documentTitle = 'Document Title';
-
-    protected $contentService;
+    public string $documentCreator = 'Rebel Walls - PdfLib Helper';
+    public string $documentTitle = 'Document Title';
 
     /**
      * PdfBaseTemplate constructor.
@@ -57,10 +65,10 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
     {
         for ($pageNumber = 1; $pageNumber <= $this->pageCount; $pageNumber++) {
             $this->pdf->resume_page('pagenumber ' . $pageNumber);
-            $this->pdf->end_page_ext("");
+            $this->pdf->end_page_ext('');
         }
 
-        $this->pdf->end_document("");
+        $this->pdf->end_document('');
 
         return $this;
     }
@@ -74,12 +82,12 @@ abstract class PdfLibBaseTemplate extends PdfLibHelper
 
     protected function suspendPage()
     {
-        $this->pdf->suspend_page("");
+        $this->pdf->suspend_page('');
     }
 
     protected function endPage()
     {
-        $this->pdf->end_page_ext("");
+        $this->pdf->end_page_ext('');
     }
 
     protected function newPage()
