@@ -25,7 +25,7 @@ class PdfCell extends BaseAsset
      *
      * @param $contentString
      */
-    public function __construct($contentString)
+    public function __construct($contentString = '')
     {
         $this->setContent($contentString);
     }
