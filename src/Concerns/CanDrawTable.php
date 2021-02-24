@@ -92,6 +92,9 @@ trait CanDrawTable
                 $tableRow = collect($tableRow);
 
                 collect($tableRow)
+                    ->reject(function ($cell) {
+                        return !$cell instanceof PdfCell;
+                    })
                     ->each(function (PdfCell $cell) use ($table, $defaultColumnWidth) {
                         if (! $cell->width) {
                             $cell->width = $defaultColumnWidth;
